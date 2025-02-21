@@ -27,5 +27,7 @@ cat /proc/uptime | awk '{printf "system uptime: %s s\n", $1}'
 cat /proc/loadavg | awk '{printf "load average (1 min, 5 min, 15 min): %s, %s, %s\n", $1, $2, $3}'
 
 # Logged in users
+echo -n 'logged in users: '
+who | awk '{printf "%s, ", $1}' | sed 's/, $/\n/'
 
 # Failed login attempts
