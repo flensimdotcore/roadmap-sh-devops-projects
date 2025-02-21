@@ -12,10 +12,10 @@ free -m | grep "Mem" | awk '{print "free memory: " $4 " Mb (" 100*$4/$2 "%)"}'
 # Top 5 processes by memory usage
 
 # OS version
-cat /proc/version | awk '{print "os version: " $1 " " $3 " " $6 " " $7}'
+cat /proc/version | awk '{printf "os version: %s %s %s %s\n", $1, $3, $6, $7}'
 
 # Uptime
-cat /proc/uptime | awk '{print "system uptime: " $1 " s" }'
+cat /proc/uptime | awk '{printf "system uptime: %s s\n", $1}'
 
 # Load average
 
