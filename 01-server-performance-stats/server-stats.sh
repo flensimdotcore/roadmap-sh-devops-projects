@@ -6,6 +6,8 @@ free -m | grep "Mem" | awk '{print "used memory: " $3 " Mb (" 100*$3/$2 "%)"}'
 free -m | grep "Mem" | awk '{print "free memory: " $4 " Mb (" 100*$4/$2 "%)"}'
 
 # Total disk usage
+df -m / | awk 'NR==2 {print "used disk: " $3 " Mb (" 100*$3/$2 "%)"}'
+df -m / | awk 'NR==2 {print "free disk: " $4 " Mb (" 100*$4/$2 "%)"}'
 
 # Top 5 processes by CPU usage
 
