@@ -6,6 +6,9 @@ Each solution has README.md with description and instructions on how to use the 
 
 Projects solved:
 1. https://roadmap.sh/projects/server-stats
+2. https://roadmap.sh/projects/log-archive-tool
+
+---
 
 Feel free to PR or issue anything, or contact me flensim.core@yandex.ru
 
