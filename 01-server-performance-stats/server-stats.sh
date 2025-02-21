@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Total CPU usage
 top -bn1 | grep "Cpu(s)" | awk '{print "CPU usage: " 100 - $8 "%"}'
 
