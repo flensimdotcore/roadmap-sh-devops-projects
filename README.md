@@ -8,7 +8,8 @@ Projects solved:
 1. https://roadmap.sh/projects/server-stats
 2. https://roadmap.sh/projects/log-archive-tool
 3. https://roadmap.sh/projects/nginx-log-analyser
-
+4. TODO (live in another repo: https://github.com/flensimdotcore/gh-deployment-workflow)
+5. https://roadmap.sh/projects/ssh-remote-server-setup
 ---
 
 Feel free to PR or issue anything, or contact me flensim.core@yandex.ru
