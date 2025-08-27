@@ -1,7 +1,7 @@
 https://roadmap.sh/projects/static-site-server
 
 # Description
-This folder contains of my solution for "Static Site Server" project. Source code contains of one deploy script `deploy.sh`.
+This folder contains of my solution for "Static Site Server" project. Source code contains of the deploy script `deploy.sh` and other files for static site.
 
 Script uses only default Linux commands for a better performance and compatibility.
 
