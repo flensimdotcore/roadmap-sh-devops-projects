@@ -1,0 +1,9 @@
+# Excluded files
+*.tmp
+*.log
+.DS_Store
+.thumbs
+node_modules/
+.git/
+.env
+*.swp
