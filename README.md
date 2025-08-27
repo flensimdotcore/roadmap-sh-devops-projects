@@ -10,6 +10,7 @@ Projects solved:
 3. https://roadmap.sh/projects/nginx-log-analyser
 4. TODO (live in another repo: https://github.com/flensimdotcore/gh-deployment-workflow)
 5. https://roadmap.sh/projects/ssh-remote-server-setup
+6. https://roadmap.sh/projects/static-site-server
 ---
 
 Feel free to PR or issue anything, or contact me flensim.core@yandex.ru

@@ -1,4 +1,4 @@
-https://roadmap.sh/projects/nginx-log-analyser
+https://roadmap.sh/projects/static-site-server
 
 # Description
 This folder contains of my solution for "Static Site Server" project. Source code contains of one deploy script `deploy.sh`.
