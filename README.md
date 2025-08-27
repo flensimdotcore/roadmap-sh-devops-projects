@@ -12,6 +12,7 @@ Projects solved:
 5. https://roadmap.sh/projects/ssh-remote-server-setup
 6. https://roadmap.sh/projects/static-site-server
 7. https://roadmap.sh/projects/basic-dns
+8. https://roadmap.sh/projects/simple-monitoring-dashboard
 ---
 
 Feel free to PR or issue anything, or contact me flensim.core@yandex.ru
