@@ -13,6 +13,7 @@ Projects solved:
 6. https://roadmap.sh/projects/static-site-server
 7. https://roadmap.sh/projects/basic-dns
 8. https://roadmap.sh/projects/simple-monitoring-dashboard
+9. https://roadmap.sh/projects/dummy-systemd-service
 ---
 
 Feel free to PR or issue anything, or contact me flensim.core@yandex.ru
