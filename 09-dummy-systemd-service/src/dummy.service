@@ -1,0 +1,19 @@
+[Unit]
+Description=Dummy Service
+After=network.target
+Requires=network.target
+
+[Service]
+Type=simple
+User=<username>
+Group=<username>
+ExecStart=<script_dest>
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=dummyservice
+Environment="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin"
+
+[Install]
+WantedBy=multi-user.target
