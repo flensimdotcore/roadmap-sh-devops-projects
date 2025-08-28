@@ -1,7 +1,7 @@
 https://roadmap.sh/projects/basic-dockerfile
 
 # Description
-This folder contains of my solution for "Dummy Systemd Service" project. Source code contains of the `Dockerfile`, which is used to build a Docker image; and `entrypoint.sh`, which is used as an entrypoint inside the container build off of this image.
+This folder contains of my solution for "Basic Dockerfile" project. Source code contains of the `Dockerfile`, which is used to build a Docker image; and `entrypoint.sh`, which is used as an entrypoint inside the container build off of this image.
 
 Instruction contains of steps on build an image and run a container.
 
