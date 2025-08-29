@@ -1,0 +1,38 @@
+---
+# Package list to install
+base_packages:
+  - fail2ban
+  - htop
+  - vim
+  - curl
+  - wget
+  - git
+  - tmux
+  - ncdu
+  - tree
+  - unzip
+  - net-tools
+  - lsof
+  - rsync
+  - ufw
+
+# fail2ban parameters
+fail2ban_ban_time: 3600
+fail2ban_find_time: 600
+fail2ban_max_retry: 3
+fail2ban_ignore_ip: 127.0.0.1/8 ::1
+
+server_ssh_port: '23456'
+
+# Additional parameters
+enable_ufw: true
+ufw_rules:
+  - rule: allow
+    port: '{{ server_ssh_port }}'
+    proto: tcp
+  - rule: allow
+    port: '80'
+    proto: tcp
+  - rule: allow
+    port: '443'
+    proto: tcp

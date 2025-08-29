@@ -1,0 +1,51 @@
+---
+- name: Update package cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  when: ansible_os_family == "Debian"
+
+# - name: Upgrade all packages
+#   package:
+#     name: "*"
+#     state: latest
+
+- name: Install base packages
+  package:
+    name: "{{ base_packages }}"
+    state: present
+
+- name: Configure fail2ban
+  template:
+    src: jail.local.j2
+    dest: /etc/fail2ban/jail.local
+    owner: root
+    group: root
+    mode: '0644'
+  notify: restart fail2ban
+
+- name: Ensure fail2ban service is enabled and started
+  service:
+    name: fail2ban
+    state: started
+    enabled: yes
+
+- name: Configure UFW rules
+  ufw:
+    rule: "{{ item.rule }}"
+    port: "{{ item.port }}"
+    proto: "{{ item.proto }}"
+  with_items: "{{ ufw_rules }}"
+  when: enable_ufw
+
+- name: Enable UFW
+  ufw:
+    state: enabled
+    policy: deny
+  when: enable_ufw
+
+- name: Clean up unnecessary packages
+  apt:
+    autoremove: yes
+    autoclean: yes
+  when: ansible_os_family == "Debian"

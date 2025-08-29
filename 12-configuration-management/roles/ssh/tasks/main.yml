@@ -1,0 +1,69 @@
+---
+- name: Validate local SSH key path
+  assert:
+    that:
+      - local_ssh_key_path is defined
+      - local_ssh_key_path | length > 0
+    msg: "local_ssh_key_path must be defined and not empty"
+
+- name: Expand local SSH key path
+  set_fact:
+    expanded_ssh_key_path: "{{ local_ssh_key_path | expanduser }}"
+
+- name: Check if local SSH public key exists
+  stat:
+    path: "{{ expanded_ssh_key_path }}"
+  register: local_key_stat
+  delegate_to: localhost
+
+- name: Fail if SSH key does not exist
+  fail:
+    msg: "SSH public key not found at {{ expanded_ssh_key_path }}. Please generate one with 'ssh-keygen -t rsa -b 4096'"
+  when: not local_key_stat.stat.exists
+
+- name: Read local SSH public key
+  slurp:
+    src: "{{ expanded_ssh_key_path }}"
+  register: local_ssh_key_content
+  delegate_to: localhost
+
+- name: Decode SSH key content
+  set_fact:
+    ssh_public_key: "{{ local_ssh_key_content.content | b64decode | trim }}"
+
+- name: Validate SSH key format
+  assert:
+    that:
+      - ssh_public_key.startswith('ssh-') or ssh_public_key.startswith('ecdsa-') or ssh_public_key.startswith('ed25519-')
+    msg: "Invalid SSH key format. Key should start with 'ssh-', 'ecdsa-' or 'ed25519-'"
+
+- name: Ensure .ssh directory exists on remote server
+  file:
+    path: "/home/{{ remote_user }}/.ssh"
+    state: directory
+    mode: '0700'
+    owner: "{{ remote_user }}"
+    group: "{{ remote_user }}"
+
+- name: Add SSH public key to remote server
+  authorized_key:
+    user: "{{ remote_user }}"
+    state: present
+    key: "{{ ssh_public_key }}"
+    exclusive: "{{ exclusive_keys | bool }}"
+    manage_dir: no
+
+- name: Set strict permissions on authorized_keys
+  file:
+    path: "{{ remote_authorized_keys }}"
+    mode: '0600'
+    owner: "{{ remote_user }}"
+    group: "{{ remote_user }}"
+
+- name: Show success message
+  debug:
+    msg: |
+      SSH key successfully deployed!
+      Local key: {{ expanded_ssh_key_path }}
+      Remote user: {{ remote_user }}
+      Key fingerprint: {{ ssh_public_key | regex_replace('.*\\s+(\\S+@\\S+)$', '\\1') }}
