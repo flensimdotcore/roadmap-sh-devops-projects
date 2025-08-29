@@ -1,0 +1,6 @@
+---
+local_ssh_key_path: "~/.ssh/id_rsa.pub"
+remote_user: "{{ ansible_user }}"
+remote_authorized_keys: "/home/{{ remote_user }}/.ssh/authorized_keys"
+force_key_update: no
+exclusive_keys: no

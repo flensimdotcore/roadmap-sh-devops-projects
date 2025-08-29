@@ -1,0 +1,13 @@
+---
+- name: Setup new server
+  hosts: all
+  become: yes
+  gather_facts: yes
+
+  roles:
+    - role: base
+      tags: ['base']
+    - role: ssh
+      tags: ['ssh']
+
+  tags: ['all']
