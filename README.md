@@ -15,6 +15,10 @@ Projects solved:
 8. https://roadmap.sh/projects/simple-monitoring-dashboard
 9. https://roadmap.sh/projects/dummy-systemd-service
 10. https://roadmap.sh/projects/basic-dockerfile
+11. TODO
+12. TODO
+13. https://roadmap.sh/projects/iac-digitalocean
+
 ---
 
 Feel free to PR or issue anything, or contact me flensim.core@yandex.ru
