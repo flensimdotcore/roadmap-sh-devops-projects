@@ -25,11 +25,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install ansible
 
-    - name: Setup SSH key
-      run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
+    # - name: Setup SSH key
+    #   run: |
+    #     mkdir -p ~/.ssh
+    #     echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+    #     chmod 600 ~/.ssh/id_rsa
 
     - name: Validate Ansible playbook syntax
       run: |
@@ -43,5 +43,8 @@ jobs:
 
     - name: Deploy application with Ansible
       run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
         cd 14-service-deployment/ansible-playbook
         ansible-playbook -i inventory.yml node_service.yml -vvvv --tags app
