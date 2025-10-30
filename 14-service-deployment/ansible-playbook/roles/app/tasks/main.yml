@@ -50,7 +50,7 @@
   git:
     repo: "{{ repo_url }}"
     dest: "/opt/{{ app_name }}"
-    version: feature/service-deployment
+    version: main
     force: yes
   become_user: "{{ app_user }}"
 
