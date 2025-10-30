@@ -35,9 +35,6 @@
   file:
     path: "/opt/{{ app_name }}"
     state: directory
-    # owner: "{{ app_user }}"
-    # group: "{{ app_user }}"
-    # mode: '0755'
 
 - name: Check if service directory exists
   stat:

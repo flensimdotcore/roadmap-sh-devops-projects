@@ -1,7 +1,6 @@
 ---
 - name: Deploy Node.js application
   hosts: all
-  # become: yes
   vars:
     app_user: "nodeapp"
     app_name: "hello-world-app"
