@@ -27,6 +27,7 @@ jobs:
 
     - name: Validate Ansible playbook syntax
       run: |
+        cd 14-service-deployment/ansible-playbook
         ansible-playbook -i inventory.yml node_service.yml --syntax-check
 
     - name: Setup SSH key
@@ -36,4 +37,5 @@ jobs:
 
     - name: Deploy application with Ansible
       run: |
+        cd 14-service-deployment/ansible-playbook
         ansible-playbook -i inventory.yml node_service.yml -vvvv --tags app
