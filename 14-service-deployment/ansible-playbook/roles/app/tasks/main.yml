@@ -33,26 +33,35 @@
 
 - name: Create application directory
   file:
-    path: "/opt/{{ app_name }}"
+    path: "{{ repo_path }}"
     state: directory
 
 - name: Check if service directory exists
   stat:
-    path: "/opt/{{ app_name }}/14-service-deployment/service"
+    path: "{{ service_path }}"
   register: service_dir
 
 - name: Clone repository
   git:
     repo: "{{ repo_url }}"
-    dest: "/opt/{{ app_name }}"
-    version: main
+    dest: "{{ repo_path }}"
+    version: feature/dockerized-service
     force: yes
   become_user: "{{ app_user }}"
 
 - name: Install npm dependencies
   npm:
-    path: "/opt/{{ app_name }}/14-service-deployment/service"
+    path: "{{ service_path }}"
     production: yes
+  become_user: "{{ app_user }}"
+
+- name: Upload .env file
+  copy:
+    src: ../service/.env
+    dest: "{{ service_path }}/.env"
+    owner: "{{ app_user }}"
+    group: "{{ app_user }}"
+    mode: '0640'
   become_user: "{{ app_user }}"
 
 - name: Create systemd service file

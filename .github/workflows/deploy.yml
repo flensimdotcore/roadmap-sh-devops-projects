@@ -35,5 +35,6 @@ jobs:
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
+        echo "${{ secrets.SECRET_MESSAGE }}" >> "{{ service_path }}/.env"
         cd 14-service-deployment/ansible-playbook
         ansible-playbook -i inventory.yml node_service.yml -vvvv --tags app
