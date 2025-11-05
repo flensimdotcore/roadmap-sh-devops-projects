@@ -50,10 +50,11 @@
     state: present
 
 - name: Pull Docker image
-  docker_image:
+  community.docker.docker_image:
     name: "flensimdotcore/devops-roadmap"
     tag: "{{ image_tag }}"
     source: pull
+    docker_host: "unix://var/run/docker.sock"
 
 - name: Run Node.js container
   docker_container:
