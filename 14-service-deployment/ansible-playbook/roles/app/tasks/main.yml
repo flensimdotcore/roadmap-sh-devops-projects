@@ -50,7 +50,7 @@
 - name: Pull Docker image
   docker_image:
     name: "flensimdotcore/devops-roadmap"
-    tag: "latest"
+    tag: "{{ image_tag }}"
     source: pull
 
 - name: Run Node.js container
