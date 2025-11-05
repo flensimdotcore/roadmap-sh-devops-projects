@@ -47,7 +47,7 @@ const authMiddleware = (req, res, next) => {
 
 app.get('/', (req, res) => {
     res.json({
-        message: 'Hello, world!',
+        message: 'Hello, world! Again...',
         timestamp: new Date().toISOString()
     });
 });
