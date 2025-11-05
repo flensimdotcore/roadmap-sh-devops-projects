@@ -3,7 +3,7 @@
 
 1. Using locally:
 ```
-ansible-playbook -i inventory.yml node_service.yml -vvvv --tags app
+ansible-playbook -i inventory.yml node_service.yml -vvvv --tags app -e "image_tag=<YOUR_IMAGE_TAG>"
 ```
 
 2. Using in CI:

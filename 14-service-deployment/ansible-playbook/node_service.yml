@@ -4,8 +4,7 @@
   vars:
     app_user: "nodeapp"
     app_name: "hello-world-app"
-    repo_url: "https://github.com/flensimdotcore/roadmap-sh-devops-projects.git"
-    app_port: 3000
+    service_path: "/opt/{{ app_name }}"
     node_version: "18.x"
 
   roles:
