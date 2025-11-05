@@ -20,7 +20,7 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
-        context: .
+        context: ./14-service-deployment/service
         push: true
         tags: |
           flensimdotcore/devops-roadmap:latest
