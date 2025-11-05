@@ -31,58 +31,36 @@
     home: "/home/{{ app_user }}"
     shell: /bin/bash
 
-- name: Remove existing application directory
-  file:
-    path: "{{ repo_path }}"
-    state: absent
-  become_user: "{{ app_user }}"
-  ignore_errors: yes
-
 - name: Create application directory
   file:
-    path: "{{ repo_path }}"
+    path: "{{ service_path }}"
     state: directory
 
-- name: Clone repository
-  git:
-    repo: "{{ repo_url }}"
-    dest: "{{ repo_path }}"
-    version: feature/dockerized-service
-    force: yes
-  become_user: "{{ app_user }}"
-
-- name: Check if service directory exists
-  stat:
-    path: "{{ service_path }}"
-  register: service_dir
-
-- name: Install npm dependencies
-  npm:
-    path: "{{ service_path }}"
-    production: yes
-  become_user: "{{ app_user }}"
-
-- name: Upload .env file
-  copy:
-    src: ../service/.env
-    dest: "{{ service_path }}/.env"
-    owner: "{{ app_user }}"
-    group: "{{ app_user }}"
-    mode: '0640'
-  become_user: "{{ app_user }}"
-
-- name: Create systemd service file
-  template:
-    src: nodeapp.service.j2
-    dest: /etc/systemd/system/{{ app_name }}.service
-    owner: root
-    group: root
-    mode: '0644'
-  notify: restart app
-
-- name: Enable and start application service
-  systemd:
-    name: "{{ app_name }}"
-    enabled: yes
+- name: Ensure Docker service is running
+  service:
+    name: docker
     state: started
-    daemon_reload: yes
+    enabled: yes
+
+- name: Install Docker SDK for Python
+  pip:
+    name: docker
+    state: present
+
+- name: Pull Docker image
+  docker_image:
+    name: "flensimdotcore/devops-roadmap"
+    tag: "latest"
+    source: pull
+
+- name: Run Node.js container
+  docker_container:
+    name: "hello-world-app"
+    image: "flensimdotcore/devops-roadmap:latest"
+    state: started
+    restart_policy: always
+    ports:
+      - "3000:3000"
+    env:
+      NODE_ENV: "production"
+    env_file: "/opt/service/.env"
