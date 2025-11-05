@@ -60,4 +60,4 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
         echo "${{ secrets.SECRET_MESSAGE }}" >> "{{ service_path }}/.env"
         cd 14-service-deployment/ansible-playbook
-        ansible-playbook -i inventory.yml node_service.yml -vvvv --tags app
+        ansible-playbook -i inventory.yml node_service.yml -vvvv --tags app -e "image_tag=${{ github.sha }}"

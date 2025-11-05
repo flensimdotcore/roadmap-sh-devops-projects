@@ -56,7 +56,7 @@
 - name: Run Node.js container
   docker_container:
     name: "hello-world-app"
-    image: "flensimdotcore/devops-roadmap:latest"
+    image: "flensimdotcore/devops-roadmap:{{ image_tag }}"
     state: started
     restart_policy: always
     ports:
