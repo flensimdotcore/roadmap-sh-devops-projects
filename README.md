@@ -18,8 +18,8 @@ Projects solved:
 11. TODO
 12. TODO
 13. https://roadmap.sh/projects/iac-digitalocean
-14. https://roadmap.sh/projects/nodejs-service-deployment and https://roadmap.sh/projects/dockerized-service-deployment
-
+14. https://roadmap.sh/projects/nodejs-service-deployment
+15. https://roadmap.sh/projects/dockerized-service-deployment
 ---
 
 Feel free to PR or issue anything, or contact me flensim.core@yandex.ru
