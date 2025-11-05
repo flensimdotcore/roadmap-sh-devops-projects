@@ -2,7 +2,7 @@ name: Deploy App to Server
 
 on:
   push:
-    branches: [ main ]
+    branches: [ ]
   workflow_dispatch:
 
 jobs:
