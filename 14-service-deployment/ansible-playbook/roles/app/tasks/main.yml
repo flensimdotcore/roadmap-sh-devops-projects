@@ -53,7 +53,7 @@
   command: "docker pull flensimdotcore/devops-roadmap:{{ image_tag }}"
 
 - name: Stop existing container
-  command: "docker stop {{ app_name }} || true && docker rm {{ app_name }} || true"
+  shell: "docker stop {{ app_name }} || true && docker rm {{ app_name }} || true"
 
 - name: Run Node.js container
   command: 'docker run -d \
