@@ -31,15 +31,17 @@
     home: "/home/{{ app_user }}"
     shell: /bin/bash
 
+- name: Remove existing application directory
+  file:
+    path: "{{ repo_path }}"
+    state: absent
+  become_user: "{{ app_user }}"
+  ignore_errors: yes
+
 - name: Create application directory
   file:
     path: "{{ repo_path }}"
     state: directory
-
-- name: Check if service directory exists
-  stat:
-    path: "{{ service_path }}"
-  register: service_dir
 
 - name: Clone repository
   git:
@@ -48,6 +50,11 @@
     version: feature/dockerized-service
     force: yes
   become_user: "{{ app_user }}"
+
+- name: Check if service directory exists
+  stat:
+    path: "{{ service_path }}"
+  register: service_dir
 
 - name: Install npm dependencies
   npm:

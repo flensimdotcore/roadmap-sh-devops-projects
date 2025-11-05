@@ -8,6 +8,14 @@ const APP_PORT = 3000;
 
 app.use(express.json());
 
+app.use((req, res, next) => {
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+    console.log(`Headers:`, req.headers);
+    console.log(`IP: ${req.ip}`);
+    console.log('---');
+    next();
+});
+
 const requiredEnvVars = ['SECRET_MESSAGE', 'USERNAME', 'PASSWORD'];
 const missingEnvVars = requiredEnvVars.filter(envVar => !process.env[envVar]);
 
