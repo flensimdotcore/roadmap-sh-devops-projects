@@ -24,8 +24,8 @@ jobs:
         context: ./14-service-deployment/service
         push: true
         tags: |
-          flensimdotcore/devops-roadmap:latest
-          flensimdotcore/devops-roadmap:${{ github.sha }}
+          flensimdotcore/todo-app:latest
+          flensimdotcore/todo-app:${{ github.sha }}
 
   deploy:
     name: Deploy application
