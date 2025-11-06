@@ -1,0 +1,11 @@
+all:
+  hosts:
+    www-1:
+      ansible_host: 146.190.226.7
+      ansible_port: 22
+      ansible_user: root
+      ansible_ssh_private_key_file: "~/.ssh/id_rsa"
+
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    ansible_ssh_common_args: '-o StrictHostKeyChecking=no'

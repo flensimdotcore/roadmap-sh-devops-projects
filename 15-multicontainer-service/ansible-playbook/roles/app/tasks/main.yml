@@ -1,0 +1,56 @@
+---
+- name: Update apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install required system packages
+  apt:
+    name:
+      - curl
+      - git
+      - build-essential
+      - python3-pip
+    state: present
+
+# - name: Add NodeSource repository
+#   shell: |
+#     curl -fsSL https://deb.nodesource.com/setup_{{ node_version }} | bash -
+
+# - name: Install Node.js and npm
+#   apt:
+#     name:
+#       - nodejs
+#     state: present
+
+- name: Create application user
+  user:
+    name: "{{ app_user }}"
+    system: yes
+    create_home: yes
+    home: "/home/{{ app_user }}"
+    shell: /bin/bash
+
+- name: Create application directory
+  file:
+    path: "{{ service_path }}"
+    state: directory
+
+- name: Ensure Docker service is running
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Install Docker SDK for Python
+  pip:
+    name:
+      - docker
+      - requests
+    state: present
+
+- name: Stop existing container
+  shell: docker compose down api
+
+- name: Run Node.js container
+  command: docker compose up -d

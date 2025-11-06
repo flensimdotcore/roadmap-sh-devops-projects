@@ -1,0 +1,16 @@
+[Unit]
+Description={{ app_name }} Node.js Application
+After=network.target
+
+[Service]
+Type=simple
+User={{ app_user }}
+WorkingDirectory=/opt/{{ app_name }}/14-service-deployment/service
+Environment=NODE_ENV=production
+Environment=PORT={{ app_port }}
+ExecStart=/usr/bin/node /opt/{{ app_name }}/14-service-deployment/service/app.js
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
