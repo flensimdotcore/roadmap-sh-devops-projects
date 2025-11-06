@@ -1,0 +1,63 @@
+name: Build, Push and Deploy Multicontainer App
+
+on:
+  push:
+    branches: [ "**" ]
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./14-service-deployment/service
+        push: true
+        tags: |
+          flensimdotcore/todo-app:latest
+          flensimdotcore/todo-app:${{ github.sha }}
+
+  deploy:
+    name: Deploy application
+    runs-on: ubuntu-latest
+    environment: production
+    needs: build-and-push
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install Ansible
+      run: |
+        python -m pip install --upgrade pip
+        pip install ansible
+        pip install requests==2.31.0
+
+    - name: Validate Ansible playbook syntax
+      run: |
+        cd 14-service-deployment/ansible-playbook
+        ansible-playbook -i inventory.yml node_service.yml --syntax-check
+
+    - name: Deploy application with Ansible
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        cd 14-service-deployment/ansible-playbook
+        ansible-playbook -i inventory.yml node_service.yml -vvvv --tags app

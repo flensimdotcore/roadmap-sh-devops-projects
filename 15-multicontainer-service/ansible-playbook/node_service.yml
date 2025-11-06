@@ -1,0 +1,12 @@
+---
+- name: Deploy multicontainer application
+  hosts: all
+  vars:
+    app_user: "todoapp"
+    app_name: "todo-app"
+    service_path: "/opt/{{ app_name }}"
+    node_version: "18.x"
+
+  roles:
+    - app
+  tags: [app]

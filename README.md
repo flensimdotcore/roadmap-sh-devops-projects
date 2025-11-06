@@ -20,6 +20,7 @@ Projects solved:
 13. https://roadmap.sh/projects/iac-digitalocean
 14. https://roadmap.sh/projects/nodejs-service-deployment
 15. https://roadmap.sh/projects/dockerized-service-deployment
+16. https://roadmap.sh/projects/multi-container-service
 ---
 
 Feel free to PR or issue anything, or contact me flensim.core@yandex.ru
