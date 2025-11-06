@@ -13,16 +13,6 @@
       - python3-pip
     state: present
 
-# - name: Add NodeSource repository
-#   shell: |
-#     curl -fsSL https://deb.nodesource.com/setup_{{ node_version }} | bash -
-
-# - name: Install Node.js and npm
-#   apt:
-#     name:
-#       - nodejs
-#     state: present
-
 - name: Create application user
   user:
     name: "{{ app_user }}"
