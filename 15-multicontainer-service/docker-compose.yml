@@ -20,7 +20,7 @@ services:
       - todo-network
 
   api:
-    image: "todo-app:latest"
+    image: "flensimdotcore/todo-app:latest"
     container_name: todo-api
     restart: unless-stopped
     env_file:
