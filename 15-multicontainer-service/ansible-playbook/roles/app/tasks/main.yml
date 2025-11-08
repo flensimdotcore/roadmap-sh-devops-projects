@@ -54,6 +54,6 @@
         chdir: "{{ service_path }}/15-multicontainer-service"
 
     - name: Run Node.js container
-      command: docker compose up -d
+      command: docker compose up --pull always -d
       args:
         chdir: "{{ service_path }}/15-multicontainer-service"
