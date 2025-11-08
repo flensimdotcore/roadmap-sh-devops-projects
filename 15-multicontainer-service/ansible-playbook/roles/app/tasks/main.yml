@@ -51,9 +51,9 @@
     - name: Stop existing container
       shell: docker compose down api
       args:
-        chdir: "./{{ service_path }}/15-multicontainer-service"
+        chdir: "{{ service_path }}/15-multicontainer-service"
 
     - name: Run Node.js container
       command: docker compose up -d
       args:
-        chdir: "./{{ service_path }}/15-multicontainer-service"
+        chdir: "{{ service_path }}/15-multicontainer-service"
