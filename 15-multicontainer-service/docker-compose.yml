@@ -37,7 +37,7 @@ services:
       - mongodb
     networks:
       - todo-network
-    command: npm run dev
+    command: npm run start
 
 volumes:
   mongodb_data:
