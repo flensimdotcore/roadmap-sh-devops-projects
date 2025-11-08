@@ -26,6 +26,14 @@
     path: "{{ service_path }}"
     state: directory
 
+- name: Clone repository from GitHub
+  git:
+    repo: "https://github.com/flensimdotcore/roadmap-sh-devops-projects.git"
+    dest: "{{ service_path }}"
+    version: main
+    clone: yes
+    update: yes
+
 - name: Ensure Docker service is running
   service:
     name: docker
@@ -39,8 +47,11 @@
       - requests
     state: present
 
-- name: Stop existing container
-  shell: docker compose down api
+- block:
+    - name: Stop existing container
+      shell: docker compose down api
 
-- name: Run Node.js container
-  command: docker compose up -d
+    - name: Run Node.js container
+      command: docker compose up -d
+  args:
+    chdir: "./{{ service_path }}/15-multicontainer-service"
