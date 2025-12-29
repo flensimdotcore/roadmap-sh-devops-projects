@@ -41,9 +41,13 @@ ssh -i <path/to/your/private/key> root@<server_ip>
 adduser <username>
 usermod -aG sudo <username>
 ```
-3. Now on your computer run:
+3. Now copy ssh keys from root to new user:
 ```bash
-ssh-copy-id <username>@<server_ip>
+mkdir -p /home/<username>/.ssh
+cp /root/.ssh/authorized_keys /home/<username>/.ssh/
+chown -R <username>:<username> /home/<username>/.ssh
+chmod 700 /home/<username>/.ssh
+chmod 600 /home/<username>/.ssh/authorized_keys
 ```
 4. And log in back as your new user:
 ```bash
@@ -76,7 +80,8 @@ MaxSessions 2
 ```
 6. Restart ssh server:
 ```bash
-sudo systemctl restart sshd
+sudo systemctl daemon-reload
+sudo systemctl restart ssh.socket
 ```
 7. Now let's install `fail2ban` for even more security:
 ```bash
