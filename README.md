@@ -21,6 +21,7 @@ Projects solved:
 14. https://roadmap.sh/projects/nodejs-service-deployment
 15. https://roadmap.sh/projects/dockerized-service-deployment
 16. https://roadmap.sh/projects/multi-container-service
+17. https://roadmap.sh/projects/monitoring
 
 ---
 
